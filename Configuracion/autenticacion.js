@@ -4,7 +4,7 @@ const respuesta = require("../Configuracion/respuestaApi");
 pathsAExcluir = ["/estado", "/usuario/registro", "/usuario/login", "/producto/obtenerProducto"];
 
 const crearToken = (data) => {
-  return jwt.sign(JSON.stringify(data), firma);
+        return jwt.sign(JSON.stringify(data[0]), firma);
 };
 
 const autenticarToken = (req,res,next) => {
@@ -13,13 +13,13 @@ const autenticarToken = (req,res,next) => {
     } else{
         try{
             if(req.headers.authorization) {
-                let autorizacion = req.headers.authorization.split(' ')[1];
+                const autorizacion = req.headers.authorization.split(' ')[1];
                 const verificacion = jwt.verify(autorizacion, firma);
                 try{
                     req.usuario = verificacion;
-                     next();
+                    next();
                 }catch(e){
-                    return respuesta.error(req,res,"Error interno",'500', e);
+                    return respuesta.error(req,res,"Error al autenticarte",'403', null);
                 }
             } else {
                 return respuesta.error(req,res,"No estas identificado",'401', null);
@@ -33,8 +33,7 @@ const autenticarToken = (req,res,next) => {
 
 const permisoAdmin = (req,res,next) => {
     try{
-        console.log(req);
-        if (req.usuario.es_admin) {
+        if (req.usuario[0].es_admin === 1) {
             next();
         } else {
             return respuesta.error(req,res,"Acceso denegado",'403', null);

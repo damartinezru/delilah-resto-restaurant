@@ -1,30 +1,51 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-const negocio = require('../Negocio/pedidoBL');
-const respuesta = require('../Configuracion/respuestaApi');
+const negocio = require("../Negocio/pedidoBL");
+const respuesta = require("../Configuracion/respuestaApi");
+const autenticacion = require("../Configuracion/autenticacion");
 
-
-
-router.get("/",(req, res) => {
-    negocio.ObtenerPedido().then(data => {
-        respuesta.exitoso(req,res,data,200)
-    }).catch(error => {
-        respuesta.error(req, res, "Error interno del servidor", 500, error)
+router.get("/obtenerPedido", (req, res) => {
+  negocio
+    .ObtenerPedido()
+    .then((data) => {
+      respuesta.exitoso(req, res, data, 200);
+    })
+    .catch((error) => {
+      respuesta.error(req, res, "Error interno del servidor", 500, error);
     });
 });
 
-router.post("/", (req,res) => {
-    negocio.GenerarFactura(req.body).then(data => {
-        respuesta.exitoso(req,res,data,201)
-    }).catch(error =>
-        respuesta.error(req,res,"Error interno del servidor", 500, error));
+router.post("/agregarPedido", autenticacion.permisoAdmin, (req, res) => {
+  negocio
+    .GenerarFactura(req, res)
+    .then((data) => {
+      respuesta.exitoso(req, res, data, 201);
+    })
+    .catch((error) =>
+      respuesta.error(req, res, "Error interno del servidor", 500, error)
+    );
 });
 
-router.put("/", (req,res) => {
-    negocio.EditarPedido(req.body).then(data => {
-        respuesta.exitoso(req,res,data,200)
-    }).catch(error => 
-        respuesta.error(req,res,"Error interno del servidor", 500, error))
+router.put("/editarPedido", autenticacion.permisoAdmin, (req, res) => {
+  negocio
+    .EditarPedido(req, res)
+    .then((data) => {
+      respuesta.exitoso(req, res, data, 200);
+    })
+    .catch((error) =>
+      respuesta.error(req, res, "Error interno del servidor", 500, error)
+    );
 });
 
-module.exports = router
+router.delete("/eliminarPedido", autenticacion.permisoAdmin, (req, res) => {
+  negocio
+    .EliminarPedido(req, res)
+    .then((data) => {
+      respuesta.exitoso(req, res, data, 200);
+    })
+    .catch((error) =>
+      respuesta.error(req, res, "Error interno del servidor", 500, error)
+    );
+});
+
+module.exports = router;

@@ -34,7 +34,9 @@ const editarProducto = async (entidadProducto) => {
       replacements: [producto.descripcion, producto.precio_unitario],
     },
     { type: contextoProducto.contextoBD.QueryTypes.UPDATE }
-  );
+  ).then(() => {
+    return `Producto ${producto.descripcion} actualizado exitosamente`;
+  });
 };
 
 const eliminarProducto = async (entidadProducto) => {
@@ -45,7 +47,9 @@ const eliminarProducto = async (entidadProducto) => {
       replacements: [producto.id],
     },
     { type: contextoProducto.contextoBD.QueryTypes.DELETE }
-  );
+  ).then(() => {
+    return `Producto ${producto.descripcion} eliminado exitosamente`;
+  });;
 };
 
 module.exports = {

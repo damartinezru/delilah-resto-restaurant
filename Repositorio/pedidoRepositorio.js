@@ -34,7 +34,7 @@ const agregarPedido = async (entidadPedido) => {
       { type: contextoPedido.contextoBD.QueryTypes.INSERT }
     )
     .then((resultado) => {
-      return `Pedido con orden ${resultado.id} generado exitosamente`;
+      return resultado;
     });
 };
 
@@ -57,7 +57,7 @@ const editarPedido = async (entidadPedido) => {
         fecha_modificacion = ?,
         usuario_id = ?,
         estado_id = ?,
-        forma_pago = ?,
+        forma_pago = ?
         WHERE id = ?`,
       {
         replacements: [
@@ -67,7 +67,7 @@ const editarPedido = async (entidadPedido) => {
           pedido.usuario_id,
           pedido.estado_id,
           pedido.forma_pago,
-          pedido.id,
+          pedido.id
         ],
       },
       { type: contextoPedido.contextoBD.QueryTypes.UPDATE }
@@ -86,7 +86,7 @@ const eliminarPedido = async (entidadPedido) => {
       { type: contextoPedido.contextoBD.QueryTypes.DELETE }
     )
     .then((resultado) => {
-      return resultado;
+      return `Pedido con orden ${resultado.id} eliminado exitosamente`;
     });
 };
 
