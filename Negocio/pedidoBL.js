@@ -66,7 +66,7 @@ const EditarPedido = (req, res) => {
 
 const EliminarPedido = (req, res) => {
   return new Promise((resolve, reject) => {
-    resolve(repositorio.eliminarPedido(req.body));
+    resolve(repositorio.eliminarPedido(req.params.id));
   });
 };
 

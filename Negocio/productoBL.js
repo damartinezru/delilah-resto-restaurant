@@ -20,7 +20,7 @@ const EditarProducto = (req, res) => {
 
 const EliminarProducto = (req, res) => {
   return new Promise((resolve, reject) => {
-    resolve(repositorio.eliminarProducto(req.body));
+    resolve(repositorio.eliminarProducto(req.params.id));
   });
 };
 

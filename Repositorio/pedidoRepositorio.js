@@ -91,13 +91,12 @@ const eliminarPedidoProducto = async(idPedido) => {
     });
 }
 
-const eliminarPedido = async (entidadPedido) => {
-  let pedido = new objPedido(entidadPedido);
-  await eliminarPedidoProducto(pedido.id);
+const eliminarPedido = async (idPedido) => {
+  await eliminarPedidoProducto(idPedido);
   return contextoPedido.contextoBD
     .query(
       `DELETE FROM pedido WHERE id = ?`,
-      { replacements: [pedido.id] },
+      { replacements: [idPedido] },
       { type: contextoPedido.contextoBD.QueryTypes.DELETE }
     )
 

@@ -39,16 +39,15 @@ const editarProducto = async (entidadProducto) => {
   });
 };
 
-const eliminarProducto = async (entidadProducto) => {
-  let producto = new objProducto(entidadProducto);
+const eliminarProducto = async (idProducto) => {
   return contextoProducto.contextoBD.query(
     "DELETE FROM producto WHERE id = ?",
     {
-      replacements: [producto.id],
+      replacements: [idProducto],
     },
     { type: contextoProducto.contextoBD.QueryTypes.DELETE }
   ).then(() => {
-    return `Producto ${producto.descripcion} eliminado exitosamente`;
+    return `Producto eliminado exitosamente`;
   });;
 };
 

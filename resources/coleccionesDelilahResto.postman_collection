@@ -1,7 +1,7 @@
 {
 	"info": {
-		"_postman_id": "9dce3270-2008-42b1-aad4-f4a6ea91ca2d",
-		"name": "Request",
+		"_postman_id": "8ebb2368-3ff1-473e-a276-6938e5c71a41",
+		"name": "Solicitudes",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
@@ -33,12 +33,11 @@
 							}
 						},
 						"url": {
-							"raw": "{{URL_BASE}}/pedido/agregarPedido",
+							"raw": "{{URL_BASE}}pedido/agregarPedido",
 							"host": [
-								"{{URL_BASE}}"
+								"{{URL_BASE}}pedido"
 							],
 							"path": [
-								"pedido",
 								"agregarPedido"
 							]
 						}
@@ -48,15 +47,33 @@
 				{
 					"name": "EditarPedido",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN_ADMIN}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "PUT",
 						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\": 1,\n    \"total_pedido\": \"24000\",\n    \"fecha_creacion\": \"2020-06-22T10:01:10.000Z\",\n    \"fecha_modificacion\": \"2020-06-22T10:01:10.000Z\",\n    \"usuario_id\": 2,\n    \"estado_id\": 3,\n    \"forma_pago\": \"efectivo\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
-							"raw": "{{URL_BASE}}/pedido/editarPedido",
+							"raw": "{{URL_BASE}}pedido/editarPedido",
 							"host": [
-								"{{URL_BASE}}"
+								"{{URL_BASE}}pedido"
 							],
 							"path": [
-								"pedido",
 								"editarPedido"
 							]
 						}
@@ -66,16 +83,26 @@
 				{
 					"name": "EliminarPedido",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN_ADMIN}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "{{URL_BASE}}/pedido/eliminarPedido",
+							"raw": "{{URL_BASE}}pedido/eliminarPedido/1",
 							"host": [
-								"{{URL_BASE}}"
+								"{{URL_BASE}}pedido"
 							],
 							"path": [
-								"pedido",
-								"eliminarPedido"
+								"eliminarPedido",
+								"1"
 							]
 						}
 					},
@@ -84,10 +111,26 @@
 				{
 					"name": "ObtenerPedido",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN_ADMIN}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": ""
+							"raw": "{{URL_BASE}}pedido/obtenerPedido",
+							"host": [
+								"{{URL_BASE}}pedido"
+							],
+							"path": [
+								"obtenerPedido"
+							]
 						}
 					},
 					"response": []
@@ -104,14 +147,9 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3000/estado",
-							"protocol": "http",
+							"raw": "{{URL_BASE}}estado",
 							"host": [
-								"localhost"
-							],
-							"port": "3000",
-							"path": [
-								"estado"
+								"{{URL_BASE}}estado"
 							]
 						}
 					},
@@ -132,12 +170,11 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{URL_BASE}}/producto/obtenerProducto",
+							"raw": "{{URL_BASE}}producto/obtenerProducto",
 							"host": [
-								"{{URL_BASE}}"
+								"{{URL_BASE}}producto"
 							],
 							"path": [
-								"producto",
 								"obtenerProducto"
 							]
 						}
@@ -176,12 +213,11 @@
 							}
 						},
 						"url": {
-							"raw": "{{URL_BASE}}/producto/agregarProducto",
+							"raw": "{{URL_BASE}}producto/agregarProducto",
 							"host": [
-								"{{URL_BASE}}"
+								"{{URL_BASE}}producto"
 							],
 							"path": [
-								"producto",
 								"agregarProducto"
 							]
 						}
@@ -213,12 +249,11 @@
 							}
 						},
 						"url": {
-							"raw": "{{URL_BASE}}/producto/editarProducto",
+							"raw": "{{URL_BASE}}producto/editarProducto",
 							"host": [
-								"{{URL_BASE}}"
+								"{{URL_BASE}}producto"
 							],
 							"path": [
-								"producto",
 								"editarProducto"
 							]
 						}
@@ -242,7 +277,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"id\": 1,\n    \"descripcion\": \"pescado frito\",\n    \"precio_unitario\": \"24000\"\n}",
+							"raw": "",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -250,13 +285,13 @@
 							}
 						},
 						"url": {
-							"raw": "{{URL_BASE}}/producto/eliminarProducto",
+							"raw": "{{URL_BASE}}producto/eliminarProducto/1",
 							"host": [
-								"{{URL_BASE}}"
+								"{{URL_BASE}}producto"
 							],
 							"path": [
-								"producto",
-								"eliminarProducto"
+								"eliminarProducto",
+								"1"
 							]
 						}
 					},
@@ -283,12 +318,11 @@
 							}
 						},
 						"url": {
-							"raw": "{{URL_BASE}}/usuario/registro",
+							"raw": "{{URL_BASE}}usuario/registro",
 							"host": [
-								"{{URL_BASE}}"
+								"{{URL_BASE}}usuario"
 							],
 							"path": [
-								"usuario",
 								"registro"
 							]
 						}
@@ -310,12 +344,11 @@
 							}
 						},
 						"url": {
-							"raw": "{{URL_BASE}}/usuario/login",
+							"raw": "{{URL_BASE}}usuario/login",
 							"host": [
-								"{{URL_BASE}}"
+								"{{URL_BASE}}usuario"
 							],
 							"path": [
-								"usuario",
 								"login"
 							]
 						}
@@ -338,12 +371,11 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{URL_BASE}}/usuario/listaUsuarios",
+							"raw": "{{URL_BASE}}usuario/listaUsuarios",
 							"host": [
-								"{{URL_BASE}}"
+								"{{URL_BASE}}usuario"
 							],
 							"path": [
-								"usuario",
 								"listaUsuarios"
 							]
 						}

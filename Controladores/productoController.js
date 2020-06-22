@@ -38,7 +38,7 @@ router.put("/editarProducto", autenticacion.permisoAdmin, (req, res) => {
     );
 });
 
-router.delete("/eliminarProducto", autenticacion.permisoAdmin, (req, res) => {
+router.delete("/eliminarProducto/:id", autenticacion.permisoAdmin, (req, res) => {
   negocio
     .EliminarProducto(req, res)
     .then((data) => {
