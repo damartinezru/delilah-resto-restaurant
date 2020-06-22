@@ -1,7 +1,6 @@
 const repositorio = require("../Repositorio/pedidoRepositorio");
-const { reject } = require("bluebird");
 
-const AgregarPedidoProducto = (obj) => {
+const AgregarPedidoProducto =  (obj) => {
   return new Promise((resolve, reject) => {
     resolve(repositorio.agregarPedidoProducto(obj));
   });
@@ -32,11 +31,10 @@ const GenerarFactura = async (req, res) => {
               pedido_id: pedido[0],
               producto_id: producto.id,
             };
-            await AgregarPedidoProducto(objPedidoProducto);
+            AgregarPedidoProducto(objPedidoProducto);
             total = total + producto.precio_unitario;
           }
     }catch(e){
-        reject("No se pudo confirmar tu pedido");
     }
 
     const objPedidoNuevo = {
@@ -48,13 +46,9 @@ const GenerarFactura = async (req, res) => {
       estado_id: 2,
       forma_pago: req.body.forma_pago,
     };
-    const pedidoNuevo = await repositorio.editarPedido(objPedidoNuevo);
+    resolve(repositorio.editarPedido(objPedidoNuevo));
 
-    if (pedidoNuevo) {
-      resolve(`Pedido confirmado con un total de ${objPedidoNuevo.total_pedido}`);
-    } else {
-      reject("No se pudo confirmar tu pedido");
-    }
+
   });
 };
 

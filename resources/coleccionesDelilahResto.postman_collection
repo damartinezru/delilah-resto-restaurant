@@ -1,0 +1,358 @@
+{
+	"info": {
+		"_postman_id": "9dce3270-2008-42b1-aad4-f4a6ea91ca2d",
+		"name": "Request",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Pedido",
+			"item": [
+				{
+					"name": "AgregarPedido",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN_ADMIN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"usuario_id\": 2,\n    \"forma_pago\": \"efectivo\",\n    \"productos\": [\n        {\n            \"id\": 1,\n            \"descripcion\": \"pescado horneado\",\n            \"precio_unitario\": 24000\n        }\n    ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL_BASE}}/pedido/agregarPedido",
+							"host": [
+								"{{URL_BASE}}"
+							],
+							"path": [
+								"pedido",
+								"agregarPedido"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "EditarPedido",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "{{URL_BASE}}/pedido/editarPedido",
+							"host": [
+								"{{URL_BASE}}"
+							],
+							"path": [
+								"pedido",
+								"editarPedido"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "EliminarPedido",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{URL_BASE}}/pedido/eliminarPedido",
+							"host": [
+								"{{URL_BASE}}"
+							],
+							"path": [
+								"pedido",
+								"eliminarPedido"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ObtenerPedido",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": ""
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Estado",
+			"item": [
+				{
+					"name": "ObtenerEstado",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/estado",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"estado"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Producto",
+			"item": [
+				{
+					"name": "ObtenerProducto",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL_BASE}}/producto/obtenerProducto",
+							"host": [
+								"{{URL_BASE}}"
+							],
+							"path": [
+								"producto",
+								"obtenerProducto"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "AgregarProducto",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN_ADMIN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer{ {{TOKEN_USER}} }",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"descripcion\": \"pescado horneado\",\n\t\"precio_unitario\":24000\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL_BASE}}/producto/agregarProducto",
+							"host": [
+								"{{URL_BASE}}"
+							],
+							"path": [
+								"producto",
+								"agregarProducto"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "EditarProducto",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN_ADMIN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\": 1,\n    \"descripcion\": \"pescado frito\",\n    \"precio_unitario\": \"24000\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL_BASE}}/producto/editarProducto",
+							"host": [
+								"{{URL_BASE}}"
+							],
+							"path": [
+								"producto",
+								"editarProducto"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "EliminarProducto",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN_ADMIN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\": 1,\n    \"descripcion\": \"pescado frito\",\n    \"precio_unitario\": \"24000\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL_BASE}}/producto/eliminarProducto",
+							"host": [
+								"{{URL_BASE}}"
+							],
+							"path": [
+								"producto",
+								"eliminarProducto"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Usuario",
+			"item": [
+				{
+					"name": "AgregarUsuario",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"nombre\": \"Tom\",\n\t\"apellido\": \"Nook\",\n\t\"correo\": \"tomnook@gmail.com\",\n\t\"login\": \"TomNook\",\n\t\"contrasena\": \"animal123\",\n\t\"telefono\": \"123456\",\n\t\"direccion\": \"cra 12 no 11-10\",\n\t\"pais\": \"Animal Crossing\",\n\t\"ciudad\":\"Cayo Fauno\",\n\t\"es_admin\":true\n\t\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL_BASE}}/usuario/registro",
+							"host": [
+								"{{URL_BASE}}"
+							],
+							"path": [
+								"usuario",
+								"registro"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"login\": \"IsabelleCanela\",\n\t\"contrasena\": \"animal123\" \n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL_BASE}}/usuario/login",
+							"host": [
+								"{{URL_BASE}}"
+							],
+							"path": [
+								"usuario",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ListaUsuarios",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN_ADMIN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL_BASE}}/usuario/listaUsuarios",
+							"host": [
+								"{{URL_BASE}}"
+							],
+							"path": [
+								"usuario",
+								"listaUsuarios"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		}
+	],
+	"protocolProfileBehavior": {}
+}

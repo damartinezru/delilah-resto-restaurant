@@ -1,9 +1,11 @@
 const contexto = require("./contexto");
 const objPedido = require("../EntidadesComunes/entidadPedido");
 const objProductoPedido = require("../EntidadesComunes/entidadPedidoProducto");
+const moment = require("moment");
+const entidadPedido = require("../EntidadesComunes/entidadPedido");
 const contextoPedido = new contexto();
 
-const agregarPedidoProducto = async (entidadProductoPedido) => {
+const agregarPedidoProducto = async  (entidadProductoPedido) => {
   let pedidoProducto = new objProductoPedido(entidadProductoPedido);
   return contextoPedido.contextoBD
     .query(
@@ -62,8 +64,8 @@ const editarPedido = async (entidadPedido) => {
       {
         replacements: [
           pedido.total_pedido,
-          pedido.fecha_creacion,
-          pedido.fecha_modificacion,
+          moment(pedido.fecha_creacion).format("YYYY-MM-DD HH:mm:ss"),
+          new Date(),
           pedido.usuario_id,
           pedido.estado_id,
           pedido.forma_pago,
@@ -73,21 +75,32 @@ const editarPedido = async (entidadPedido) => {
       { type: contextoPedido.contextoBD.QueryTypes.UPDATE }
     )
     .then((resultado) => {
-      return `Pedido con orden ${resultado.id} actualizado exitosamente`;
+      return `Pedido actualizado exitosamente`;
     });
 };
 
-const eliminarPedido = async (entidadPedido) => {
-  let pedido = new objPedido(entidadPedido);
+const eliminarPedidoProducto = async(idPedido) => {
   return contextoPedido.contextoBD
     .query(
-      `DELETE * FROM pedido WHERE id = ?`,
-      { replacements: [pedido.id] },
+      `DELETE FROM pedido_producto WHERE pedido_id = ?`,
+      { replacements: [idPedido] },
       { type: contextoPedido.contextoBD.QueryTypes.DELETE }
     )
     .then((resultado) => {
-      return `Pedido con orden ${resultado.id} eliminado exitosamente`;
+      return resultado;
     });
+}
+
+const eliminarPedido = async (entidadPedido) => {
+  let pedido = new objPedido(entidadPedido);
+  await eliminarPedidoProducto(pedido.id);
+  return contextoPedido.contextoBD
+    .query(
+      `DELETE FROM pedido WHERE id = ?`,
+      { replacements: [pedido.id] },
+      { type: contextoPedido.contextoBD.QueryTypes.DELETE }
+    )
+
 };
 
 module.exports = {

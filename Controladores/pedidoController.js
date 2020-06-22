@@ -19,7 +19,7 @@ router.post("/agregarPedido", autenticacion.permisoAdmin, (req, res) => {
   negocio
     .GenerarFactura(req, res)
     .then((data) => {
-      respuesta.exitoso(req, res, data, 201);
+      respuesta.exitoso(req, res, [], 201);
     })
     .catch((error) =>
       respuesta.error(req, res, "Error interno del servidor", 500, error)
@@ -30,7 +30,7 @@ router.put("/editarPedido", autenticacion.permisoAdmin, (req, res) => {
   negocio
     .EditarPedido(req, res)
     .then((data) => {
-      respuesta.exitoso(req, res, data, 200);
+      respuesta.exitoso(req, res, [], 200);
     })
     .catch((error) =>
       respuesta.error(req, res, "Error interno del servidor", 500, error)
@@ -40,8 +40,8 @@ router.put("/editarPedido", autenticacion.permisoAdmin, (req, res) => {
 router.delete("/eliminarPedido", autenticacion.permisoAdmin, (req, res) => {
   negocio
     .EliminarPedido(req, res)
-    .then((data) => {
-      respuesta.exitoso(req, res, data, 200);
+    .then(() => {
+      respuesta.exitoso(req, res, [], 200);
     })
     .catch((error) =>
       respuesta.error(req, res, "Error interno del servidor", 500, error)
