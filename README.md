@@ -1,7 +1,7 @@
 # delilah-resto-restaurant
 API desarrollada para orden y entrega de comida a domicilio.
 
-# pasos para desplegar el proyecto
+# Pasos para desplegar el proyecto
 
 1. Al descargar el proyecto hay una carpeta llamada resources la cual contiene:
     * el archivo .mysql con el script a ejecutar en mysql
