@@ -1,0 +1,463 @@
+openapi: 3.0.0
+info:
+  title: Solicitudes
+  contact: {}
+  version: "1.0.0"
+  description: |
+    Documentacion del API que consume el restaurante Delilah Resto para los servicios de reserva, pedido y delivery.
+    [#DelilahResto #ACAMICA](https://www.acamica.com/desarrollo-web-full-stack).
+  license:
+    name: Apache 2.0
+    url: 'http://www.apache.org/licenses/LICENSE-2.0.html'
+
+tags:
+  - name: Estado
+    description: Operaciones acerca del estado de los pedidos    
+  - name: Producto
+    description: Operaciones acerca de los productos 
+  - name: Usuario
+    description: Operaciones acerca de los usuarios
+  - name: Pedido
+    description: Operaciones acerca de los pedidos
+paths:
+  /pedido/agregarPedido:
+    post:
+      tags:
+      - Pedido
+      summary: AgregarPedido
+      operationId: AgregarPedido
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AgregarPedidoRequest'
+            example:
+              usuario_id: 2
+              forma_pago: efectivo
+              productos:
+              - id: 1
+                descripcion: pescado horneado
+                precio_unitario: 24000
+        required: true
+      responses:
+        200:
+          description: ''
+          headers: {}
+      deprecated: false
+  /pedido/editarPedido:
+    put:
+      security:
+        - bearerAuth: []
+      tags:
+      - Pedido
+      summary: EditarPedido
+      operationId: EditarPedido
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EditarPedidoRequest'
+            example:
+              id: 1
+              total_pedido: 24000
+              fecha_creacion: 2020-06-22T10:01:10Z
+              fecha_modificacion: 2020-06-22T10:01:10Z
+              usuario_id: 2
+              estado_id: 3
+              forma_pago: efectivo
+        required: true
+      responses:
+        200:
+          description: ''
+          headers: {}
+        403:
+          description: 'Acceso denegado'
+          headers: {}
+      deprecated: false
+  /pedido/eliminarPedido/1:
+    delete:
+      security:
+        - bearerAuth: []
+      tags:
+      - Pedido
+      summary: EliminarPedido
+      operationId: EliminarPedido
+      parameters: []
+      responses:
+        200:
+          description: ''
+          headers: {}
+        403:
+          description: 'Acceso denegado'
+          headers: {}
+      deprecated: false
+  /pedido/obtenerPedido:
+    get:
+      tags:
+      - Pedido
+      summary: ObtenerPedido
+      operationId: ObtenerPedido
+      parameters: []
+      responses:
+        200:
+          description: ''
+          headers: {}
+      deprecated: false
+  /estado:
+    get:
+      tags:
+      - Estado
+      summary: ObtenerEstado
+      operationId: ObtenerEstado
+      parameters: []
+      responses:
+        200:
+          description: ''
+          headers: {}
+      deprecated: false
+  /producto/obtenerProducto:
+    get:
+      tags:
+      - Producto
+      summary: ObtenerProducto
+      operationId: ObtenerProducto
+      parameters: []
+      responses:
+        200:
+          description: ''
+          headers: {}
+      deprecated: false
+      security: []
+  /producto/agregarProducto:
+    post:
+      security:
+        - bearerAuth: []
+      tags:
+      - Producto
+      summary: AgregarProducto
+      operationId: AgregarProducto
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AgregarProductoRequest'
+            example:
+              descripcion: pescado horneado
+              precio_unitario: 24000
+        required: true
+      responses:
+        200:
+          description: ''
+          headers: {}
+        403:
+          description: 'Acceso denegado'
+          headers: {}
+      deprecated: false
+  /producto/editarProducto:
+    put:
+      security:
+        - bearerAuth: []
+      tags:
+      - Producto
+      summary: EditarProducto
+      operationId: EditarProducto
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EditarProductoRequest'
+            example:
+              id: 1
+              descripcion: pescado frito
+              precio_unitario: 24000
+        required: true
+      responses:
+        200:
+          description: ''
+          headers: {}
+        403:
+          description: 'Acceso denegado'
+          headers: {}
+      deprecated: false
+  /producto/eliminarProducto/1:
+    delete:
+      security:
+        - bearerAuth: []
+      tags:
+      - Producto
+      summary: EliminarProducto
+      operationId: EliminarProducto
+      parameters: []
+      responses:
+        200:
+          description: ''
+          headers: {}
+        403:
+          description: 'Acceso denegado'
+          headers: {}
+      deprecated: false
+  /usuario/registro:
+    post:
+      tags:
+      - Usuario
+      summary: AgregarUsuario
+      operationId: AgregarUsuario
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AgregarUsuarioRequest'
+            example:
+              nombre: Tom
+              apellido: Nook
+              correo: tomnook@gmail.com
+              login: TomNook
+              contrasena: animal123
+              telefono: 123456
+              direccion: cra 12 no 11-10
+              pais: Animal Crossing
+              ciudad: Cayo Fauno
+              es_admin: true
+        required: true
+      responses:
+        200:
+          description: ''
+          headers: {}
+      deprecated: false
+  /usuario/login:
+    post:
+      tags:
+      - Usuario
+      summary: Login
+      operationId: Login
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LoginRequest'
+            example:
+              login: IsabelleCanela
+              contrasena: animal123
+        required: true
+      responses:
+        200:
+          description: ''
+          headers: {}
+      deprecated: false
+  /usuario/listaUsuarios:
+    get:
+      security:
+        - bearerAuth: []
+      tags:
+      - Usuario
+      summary: ListaUsuarios
+      operationId: ListaUsuarios
+      parameters: []
+      responses:
+        200:
+          description: ''
+          headers: {}
+        403:
+          description: 'Acceso denegado'
+          headers: {}
+      deprecated: false
+components:
+  schemas:
+    AgregarPedidoRequest:
+      title: AgregarPedidoRequest
+      required:
+      - usuario_id
+      - forma_pago
+      - productos
+      type: object
+      properties:
+        usuario_id:
+          type: integer
+          format: int32
+        forma_pago:
+          type: string
+        productos:
+          type: array
+          items:
+            $ref: '#/components/schemas/Producto'
+          description: ''
+      example:
+        usuario_id: 2
+        forma_pago: efectivo
+        productos:
+        - id: 1
+          descripcion: pescado horneado
+          precio_unitario: 24000
+    Producto:
+      title: Producto
+      required:
+      - id
+      - descripcion
+      - precio_unitario
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        descripcion:
+          type: string
+        precio_unitario:
+          type: integer
+          format: int32
+      example:
+        id: 1
+        descripcion: pescado horneado
+        precio_unitario: 24000
+    EditarPedidoRequest:
+      title: EditarPedidoRequest
+      required:
+      - id
+      - total_pedido
+      - fecha_creacion
+      - fecha_modificacion
+      - usuario_id
+      - estado_id
+      - forma_pago
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        total_pedido:
+          type: string
+        fecha_creacion:
+          type: string
+        fecha_modificacion:
+          type: string
+        usuario_id:
+          type: integer
+          format: int32
+        estado_id:
+          type: integer
+          format: int32
+        forma_pago:
+          type: string
+      example:
+        id: 1
+        total_pedido: 24000
+        fecha_creacion: 2020-06-22T10:01:10Z
+        fecha_modificacion: 2020-06-22T10:01:10Z
+        usuario_id: 2
+        estado_id: 3
+        forma_pago: efectivo
+    AgregarProductoRequest:
+      title: AgregarProductoRequest
+      required:
+      - descripcion
+      - precio_unitario
+      type: object
+      properties:
+        descripcion:
+          type: string
+        precio_unitario:
+          type: integer
+          format: int32
+      example:
+        descripcion: pescado horneado
+        precio_unitario: 24000
+    EditarProductoRequest:
+      title: EditarProductoRequest
+      required:
+      - id
+      - descripcion
+      - precio_unitario
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        descripcion:
+          type: string
+        precio_unitario:
+          type: string
+      example:
+        id: 1
+        descripcion: pescado frito
+        precio_unitario: 24000
+    AgregarUsuarioRequest:
+      title: AgregarUsuarioRequest
+      required:
+      - nombre
+      - apellido
+      - correo
+      - login
+      - contrasena
+      - telefono
+      - direccion
+      - pais
+      - ciudad
+      - es_admin
+      type: object
+      properties:
+        nombre:
+          type: string
+        apellido:
+          type: string
+        correo:
+          type: string
+        login:
+          type: string
+        contrasena:
+          type: string
+        telefono:
+          type: string
+        direccion:
+          type: string
+        pais:
+          type: string
+        ciudad:
+          type: string
+        es_admin:
+          type: boolean
+      example:
+        nombre: Tom
+        apellido: Nook
+        correo: tomnook@gmail.com
+        login: TomNook
+        contrasena: animal123
+        telefono: 123456
+        direccion: cra 12 no 11-10
+        pais: Animal Crossing
+        ciudad: Cayo Fauno
+        es_admin: true
+    LoginRequest:
+      title: LoginRequest
+      required:
+      - login
+      - contrasena
+      type: object
+      properties:
+        login:
+          type: string
+        contrasena:
+          type: string
+      example:
+        login: IsabelleCanela
+        contrasena: animal123
+
+  securitySchemes:
+      bearerAuth:            # arbitrary name for the security scheme
+        type: http
+        scheme: bearer
+        bearerFormat: JWT    #
+# Added by API Auto Mocking Plugin
+servers:
+  - description: SwaggerHub API Auto Mocking
+    url: https://virtserver.swaggerhub.com/damartinezru/DelilahResto/1.0.0
